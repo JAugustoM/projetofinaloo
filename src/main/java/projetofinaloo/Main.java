@@ -1,7 +1,8 @@
 package projetofinaloo;
 
-import projetofinaloo.cadastros.CadastroAluno;
-import projetofinaloo.cadastros.CadastroProfessor;
+import projetofinaloo.app.Aluno;
+import projetofinaloo.app.Professor;
+import projetofinaloo.cadastros.Cadastro;
 import projetofinaloo.view.MenuAluno;
 import projetofinaloo.view.MenuPrincipal;
 import projetofinaloo.view.MenuProfessor;
@@ -10,12 +11,12 @@ import javax.swing.JOptionPane;
 
 public class Main {
 
-	static CadastroAluno cadAluno;
-	static CadastroProfessor cadProfessor;
+	static Cadastro<Aluno> cadAluno;
+	static Cadastro<Professor> cadProfessor;
 	
 	public static void main(String[] args) {
-		cadAluno = new CadastroAluno();
-		cadProfessor = new CadastroProfessor();
+		cadAluno = new Cadastro<>();
+		cadProfessor = new Cadastro<>();
 		
 		int opcao;
 		

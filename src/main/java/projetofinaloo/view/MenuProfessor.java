@@ -1,49 +1,44 @@
 package projetofinaloo.view;
 
 import projetofinaloo.app.Professor;
-import projetofinaloo.cadastros.CadastroProfessor;
+import projetofinaloo.cadastros.Cadastro;
+import projetofinaloo.exceptions.CampoEmBrancoException;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-public class MenuProfessor {
+public class MenuProfessor extends Menu {
     public static Professor dadosNovoProfessor() {
-        String nome = lerNome();
-        String cpf = lerCpf();
-        String email = lerEmail();
-        String areaFormacao = lerFormacao();
-        String matriculaFUB = lerMatricula();
-        return new Professor(nome, cpf, email, areaFormacao, matriculaFUB);
+        try {
+            String nome = lerDado("nome", "Informe o nome do professor: ");
+            String cpf = lerDado("cpf", "Informe o CPF do professor: ");
+            String email = lerDado("email", "Informe o email do professor: ");
+            String areaFormacao = lerDado("area de formação", "Informe a area de formação do professor: ");
+            String matriculaFUB = lerDado("matricula", "Informe a matrícula do professor: ");
+            return new Professor(nome, cpf, email, areaFormacao, matriculaFUB);
+        } catch (CampoEmBrancoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+			return null;
+        }
     }
 
     public static Professor dadosNovoProfessor(String matriculaFUB) {
-        String nome = lerNome();
-        String cpf = lerCpf();
-        String email = lerEmail();
-        String areaFormacao = lerFormacao();
-        return new Professor(nome, cpf, email, areaFormacao, matriculaFUB);
-    }
-
-    private static String lerNome() {
-        return JOptionPane.showInputDialog("Informe o nome do professor: ");
-    }
-
-    private static String lerCpf() {
-        return JOptionPane.showInputDialog("Informe o cpf do professor: ");
-    }
-
-    private static String lerEmail() {
-        return JOptionPane.showInputDialog("Informe o email do professor: ");
-    }
-
-    private static String lerFormacao() {
-        return JOptionPane.showInputDialog("Informe a area de formação do professor: ");
+        try {
+            String nome = lerDado("nome", "Informe o nome do professor: ");
+            String cpf = lerDado("cpf", "Informe o CPF do professor: ");
+            String email = lerDado("email", "Informe o email do professor: ");
+            String areaFormacao = lerDado("area de formação", "Informe a area de formação do professor: ");
+            return new Professor(nome, cpf, email, areaFormacao, matriculaFUB);
+        } catch (CampoEmBrancoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+			return null;
+        }
     }
 
     private static String lerMatricula() {
         return JOptionPane.showInputDialog("Informe a matrícula do professor: ");
     }
 
-    public static void menuProfessor(CadastroProfessor cadProfessor) {
+    public static void menuProfessor(Cadastro<Professor> cadProfessor) {
         String txt = "Informe a opção desejada\n" +
 					 "1 - Cadastrar professor\n" +
 					 "2 - Pesquisar professor\n" +
@@ -59,40 +54,55 @@ public class MenuProfessor {
             switch (opcao) {
                 case 0:
                 break;
+
                 case 1:
                     Professor professor = dadosNovoProfessor();
-                    cadProfessor.cadastrarProfessor(professor);
+                    if (professor != null) {
+                        cadProfessor.cadastrar(professor.getMatriculaFUB() ,professor);
+                    }
                 break;
 
                 case 2:
-                    String matricula = lerMatricula();
-                    Professor p = cadProfessor.pesquisarProfessor(matricula);
-                    if (p != null) {
-                        JOptionPane.showMessageDialog(null, p.toString());
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Professor não encontrado.");
+                    try {
+                        String matricula = lerDado("matricula", "Informe a matrícula do professor: ");
+                        Professor p = cadProfessor.pesquisar(matricula);
+                        if (p != null) {
+                            JOptionPane.showMessageDialog(null, p.toString());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Professor não encontrado.");
+                        }
+                    } catch (CampoEmBrancoException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                 break;
 
                 case 3:
-                    matricula = lerMatricula();
-                    professor = dadosNovoProfessor(matricula);
-                    boolean atualizado = cadProfessor.atualizarProfessor(matricula, professor);
-                    if (atualizado) {
-                        JOptionPane.showMessageDialog(null, "Cadastro atualizado.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Professor não encontrado.");
-                    }
+                    try {
+                        String matricula = lerMatricula();
+                        professor = dadosNovoProfessor(matricula);
+                        boolean atualizado = cadProfessor.atualizar(matricula, professor);
+                        if (atualizado) {
+                            JOptionPane.showMessageDialog(null, "Cadastro atualizado.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Professor não encontrado.");
+                        }
+                    } catch (CampoEmBrancoException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    }   
                 break;
 
                 case 4:
-                    matricula = lerMatricula();
-                    boolean removido = cadProfessor.removerProfessor(matricula);
-                    if (removido) {
-                        JOptionPane.showMessageDialog(null, "Professor removido do cadastro.");
-                        System.gc();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Professor não encontrado.");
+                    try {
+                        String matricula = lerDado("matricula", "Informe a matrícula do professor: ");;
+                        boolean removido = cadProfessor.remover(matricula);
+                        if (removido) {
+                            JOptionPane.showMessageDialog(null, "Professor removido do cadastro.");
+                            System.gc();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Professor não encontrado.");
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                 break;
 
