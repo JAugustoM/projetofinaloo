@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 
 /**
- * Classe que implementa todos os cadastros usados na aplicação
+ * Classe parametrizada que implementa todos os cadastros usados na aplicação
  * e seus métodos, possue um HashMap como único atributo responsável
  * por armazenar todos os objetos de cada cadastro.
  * @author José Augusto
@@ -12,7 +12,7 @@ import java.util.HashMap;
 */
 public class Cadastro<E> {
     private HashMap<String, E> cadastro;
-	
+
     public Cadastro() {
         cadastro = new HashMap<>();
     }
@@ -32,7 +32,7 @@ public class Cadastro<E> {
 	 * Retorna o objeto identificado pela chave passada como argumento ou null
 	 * caso a chave não exista no HashMap.
 	 * @param chave - String que identifica um objeto no cadastro
-	 * @return Objeto no cadastro a qual corresponde a chave especificada
+	 * @return Objeto no cadastro a qual corresponde a chave especificada, ou null caso o objeto não seja encontrado
 	 */
     public E pesquisar(String chave) {
 		E resposta =  null;

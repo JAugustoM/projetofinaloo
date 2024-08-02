@@ -10,4 +10,4 @@ que implementa um sistema de gestão acadêmica como especificado no [enunciado]
 
 ## Modo de Execução
 
-Arquivo .jar
+O projeto pode ser compilado e depois iniciado pela classe main, alternativamente na pasta bin há um arquivo .jar que pode ser executado com o comando `java -jar` desde que se tenha instalado um JDK com versão maior ou igual a 21.

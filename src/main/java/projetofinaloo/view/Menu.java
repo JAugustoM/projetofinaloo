@@ -13,4 +13,14 @@ public abstract class Menu {
             return dado;
         }
     }
+
+    protected static String lerDado(String campo ,String mensagem, String padrao) {
+        String dado = JOptionPane.showInputDialog(mensagem);
+        if (dado.isEmpty()) {
+            return padrao;
+        } else {
+            return dado;
+        }
+    }
+
 }

@@ -34,10 +34,6 @@ public class MenuProfessor extends Menu {
         }
     }
 
-    private static String lerMatricula() {
-        return JOptionPane.showInputDialog("Informe a matrícula do professor: ");
-    }
-
     public static void menuProfessor(Cadastro<Professor> cadProfessor) {
         String txt = "Informe a opção desejada\n" +
 					 "1 - Cadastrar professor\n" +
@@ -78,9 +74,9 @@ public class MenuProfessor extends Menu {
 
                 case 3:
                     try {
-                        String matricula = lerMatricula();
-                        professor = dadosNovoProfessor(matricula);
-                        boolean atualizado = cadProfessor.atualizar(matricula, professor);
+                        String matricula = lerDado("matricula", "Informe a matrícula do professor: ");
+                        Professor p = dadosNovoProfessor(matricula);
+                        boolean atualizado = cadProfessor.atualizar(matricula, p);
                         if (atualizado) {
                             JOptionPane.showMessageDialog(null, "Cadastro atualizado.");
                         } else {
@@ -101,7 +97,7 @@ public class MenuProfessor extends Menu {
                         } else {
                             JOptionPane.showMessageDialog(null, "Professor não encontrado.");
                         }
-                    } catch (Exception e) {
+                    } catch (CampoEmBrancoException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                 break;

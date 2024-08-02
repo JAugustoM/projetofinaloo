@@ -2,13 +2,13 @@ package projetofinaloo.app;
 
 public class Disciplina {
     private String nome,
-                   codigo,
-                   cargaHoraria;
+                   codigo;
+    private int cargaHoraria;
 
-    public Disciplina(String nome, String codigo, String cargaHoraria) {
+    public Disciplina(String nome, String codigo, int cargaHoraria) {
         this.nome = nome;
         this.codigo = codigo;
-        this.cargaHoraria = codigo;
+        this.cargaHoraria = cargaHoraria;
     }
 
     public String getNome() {
@@ -19,7 +19,7 @@ public class Disciplina {
         return codigo;
     }
 
-    public String getCargaHoraria() {
+    public int getCargaHoraria() {
         return cargaHoraria;
     }
 

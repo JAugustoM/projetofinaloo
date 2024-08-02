@@ -1,9 +1,9 @@
 package projetofinaloo.app;
 
-public class Aluno extends PessoaFisica{
+public class Aluno extends PessoaFisica implements Comparable<Aluno>{
 
-	String matricula, 
-	       curso;
+	private String matricula, 
+	       		   curso;
 	
 	public Aluno(String nome, String cpf, String email, String matricula, String curso) {
 		super(nome, cpf, email);
@@ -32,4 +32,8 @@ public class Aluno extends PessoaFisica{
 		return resposta;
 	}
 
+	@Override
+	public int compareTo(Aluno a) {
+		return this.getNome().compareTo(a.getNome());
+	}
 }
