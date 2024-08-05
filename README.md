@@ -18,4 +18,4 @@ Um exemplo de utilização está presente no arquivo ![exemplo.md](exemplo.md), 
 
 ## Documentação
 
-A documetação foi feita utilizando a ferramenta javadoc, os comentários feitos podem ser vistos nas próprias classes ou por meio da ![página](./javadocs/index.html) criada pelo javadoc.
+A documetação foi feita utilizando a ferramenta javadoc, os comentários feitos podem ser vistos nas próprias classes ou por meio da [página](https://jaugustom.github.io/projetofinaloo/) criada pelo javadoc.

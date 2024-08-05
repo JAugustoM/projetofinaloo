@@ -23,6 +23,9 @@ public class Main {
 	static Cadastro<Disciplina> cadDisciplina;
 	static Cadastro<Turma> cadTurma;
 	
+	/**
+	 * 
+	 */
 	public static void main(String[] args) {
 		cadAluno = new Cadastro<>();
 		cadProfessor = new Cadastro<>();
