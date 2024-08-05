@@ -67,3 +67,5 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,maven,java
 .vscode/settings.json
+
+cola.md
