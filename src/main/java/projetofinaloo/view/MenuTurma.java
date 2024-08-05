@@ -118,7 +118,11 @@ public class MenuTurma extends Menu {
                 case 1:
                     Turma turma = dadosNovaTurma(cadP, cadD);
                     if (turma != null) {
-                        cadT.cadastrar(turma.getCodTurma() ,turma);
+                        if (cadT.cadastrar(turma.getCodTurma() ,turma)) {
+                            JOptionPane.showMessageDialog(null, "Turma cadastrada com sucesso.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Uma turma com o código informado já existe no cadastro.");
+                        }
                     }
                 break;
 

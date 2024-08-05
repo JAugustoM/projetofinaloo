@@ -53,7 +53,11 @@ public class MenuDisciplina extends Menu {
 				case 1:
 					Disciplina novaDisciplina = dadosNovaDisciplina();
 					if (novaDisciplina != null) {
-						cadDisciplina.cadastrar(novaDisciplina.getCodigo(), novaDisciplina);
+						if(cadDisciplina.cadastrar(novaDisciplina.getCodigo(), novaDisciplina)) {
+							JOptionPane.showMessageDialog(null, "Disciplina cadastrada com sucesso.");
+						} else {
+							JOptionPane.showMessageDialog(null, "Uma disciplina com o código informado já existe no cadastro.");
+						}
 					}
 				break;
 

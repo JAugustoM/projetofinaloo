@@ -13,6 +13,9 @@ import projetofinaloo.view.MenuTurma;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Classe executável do programa
+ */
 public class Main {
 
 	static Cadastro<Aluno> cadAluno;

@@ -11,3 +11,11 @@ que implementa um sistema de gestão acadêmica como especificado no [enunciado]
 ## Modo de Execução
 
 O projeto pode ser compilado e depois iniciado pela classe main, alternativamente na pasta bin há um arquivo .jar que pode ser executado com o comando `java -jar` desde que se tenha instalado um JDK com versão maior ou igual a 21.
+
+## Exemplo de Utilização
+
+Um exemplo de utilização está presente no arquivo ![exemplo.md](exemplo.md), por brevidade o exemplo não apresenta todas as funções do progama.
+
+## Documentação
+
+A documetação foi feita utilizando a ferramenta javadoc, os comentários feitos podem ser vistos nas próprias classes ou por meio da ![página](./javadocs/index.html) criada pelo javadoc.

@@ -23,9 +23,12 @@ public class Cadastro<E> {
 	 * @param e - Objeto a ser cadastrado 
 	 * @return O número de registros no cadastro
 	 */
-    public int cadastrar(String chave ,E e) {
+    public boolean cadastrar(String chave ,E e) {
+		if (pesquisar(chave) != null) {
+			return false;
+		}
 		cadastro.put(chave, e);
-		return cadastro.size();
+		return true;
 	}
 
 	/**

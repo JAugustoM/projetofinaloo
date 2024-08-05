@@ -55,7 +55,11 @@ public class MenuAluno extends Menu {
 				case 1:
 					Aluno novoAluno = dadosNovoAluno();
 					if (novoAluno != null) {
-						cadAluno.cadastrar(novoAluno.getMatricula(),novoAluno);
+						if (cadAluno.cadastrar(novoAluno.getMatricula(),novoAluno)) {
+							JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso.");
+						} else {
+							JOptionPane.showMessageDialog(null, "Um aluno com a mátricula informada já existe no cadastro.");
+						}
 					}
 				break;
 

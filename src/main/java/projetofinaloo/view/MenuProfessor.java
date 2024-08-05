@@ -54,7 +54,11 @@ public class MenuProfessor extends Menu {
                 case 1:
                     Professor professor = dadosNovoProfessor();
                     if (professor != null) {
-                        cadProfessor.cadastrar(professor.getMatriculaFUB() ,professor);
+                        if (cadProfessor.cadastrar(professor.getMatriculaFUB() ,professor)) {
+                            JOptionPane.showMessageDialog(null, "Professor cadastrado com sucesso.");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Um professor com a matrícula informada já existe no cadastro");
+                        }
                     }
                 break;
 
