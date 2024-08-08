@@ -23,9 +23,6 @@ public class Main {
 	static Cadastro<Disciplina> cadDisciplina;
 	static Cadastro<Turma> cadTurma;
 	
-	/**
-	 * 
-	 */
 	public static void main(String[] args) {
 		cadAluno = new Cadastro<>();
 		cadProfessor = new Cadastro<>();
@@ -35,7 +32,12 @@ public class Main {
 		int opcao;
 		
 		do {
-			opcao = MenuPrincipal.menuOpcoes();
+			try {
+				opcao = MenuPrincipal.menuOpcoes();
+			} catch (NumberFormatException e) {
+				opcao = -1;
+			}
+			
 			switch (opcao) {
 				case 0:
 				break;

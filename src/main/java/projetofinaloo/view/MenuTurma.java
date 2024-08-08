@@ -11,7 +11,19 @@ import projetofinaloo.exceptions.CampoEmBrancoException;
 import projetofinaloo.exceptions.DisciplinaNaoAtribuidaException;
 import projetofinaloo.exceptions.ProfessorNaoAtribuidoException;
 
+/**
+ * Classe que dá acesso ao usuário ao cadastro de turmas
+ * @see projetofinaloo.app.Turma
+ * @see projetofinaloo.cadastros.Cadastro
+ */
 public class MenuTurma extends Menu {
+    /**
+	 * Método utilizado para criar uma nova instância de Turma 
+     * @param cadProfessor Cadastro de professores
+     * @param cadDisciplina Cadastro de disciplinas
+	 * @return Uma nova instância de Turma ou {@code null} caso um dos campos esteja em branco ou o Professor ou Disciplina
+     * especificado não exista no cadastro
+	 */
     public static Turma dadosNovaTurma(Cadastro<Professor> cadProfessor, Cadastro<Disciplina> cadDisciplina) {
         try {
             String codTurma = lerDado("turma", "Informe o código da turma");
@@ -33,6 +45,15 @@ public class MenuTurma extends Menu {
         }
     }
 
+    /**
+	 * Método utilizado para criar uma nova instância de Turma com um código já conhecido,
+     * permitindo a atualização do cadastro dessa Turma
+     * @param cadProfessor Cadastro de professores
+     * @param cadDisciplina Cadastro de disciplinas
+     * @param codTurma Código da instância de Turma que será retornada
+	 * @return Uma nova instância de Turma ou {@code null} caso um dos campos esteja em branco ou o Professor ou Disciplina
+     * especificado não exista no cadastro
+	 */
     public static Turma dadosNovaTurma(Cadastro<Professor> cadProfessor, Cadastro<Disciplina> cadDisciplina, String codTurma) {
         try {
             String codDisciplina = lerDisciplina();
@@ -53,22 +74,42 @@ public class MenuTurma extends Menu {
         }
     }
 
+    /**
+     * Método utilizado para ler o código de uma Disciplina vindo do usuário, lança a 
+     * exceção {@code DisciplinaNaoAtribuidaException} caso o input esteja vazio
+     * @return A String lida
+     * @throws DisciplinaNaoAtribuidaException caso o input esteja vazio
+     */
     private static String lerDisciplina() {
-        String disciplina = JOptionPane.showInputDialog("Informe o código da disciplina da turma:");
+        String disciplina = JOptionPane.showInputDialog("Informe o código da disciplina da turma:").trim();
         if (disciplina.isEmpty()) {
             throw new DisciplinaNaoAtribuidaException();
         }
         return disciplina;
     }
 
+    /**
+     * Método utilizado para ler a matrícula de um Professor vindo do usuário, lança a 
+     * exceção {@code ProfessorNaoAtribuidoException} caso o input esteja vazio
+     * @return A String lida
+     * @throws ProfessorNaoAtribuidoException caso o input esteja vazio
+     */
     private static String lerProfessor() {
-        String professor = JOptionPane.showInputDialog("Informe a mátricula do professor da turma:");
+        String professor = JOptionPane.showInputDialog("Informe a mátricula do professor da turma:").trim();
         if (professor.isEmpty()) {
             throw new ProfessorNaoAtribuidoException();
         }
         return professor;
     }
 
+
+    /**
+     * Método utilizado para apresentar as informações de uma turma, isto é: seu código, professor responsável,
+     * disciplina, total de alunos matriculados e lista de presença
+     * @param t Turma que será apresentada
+     * @param cadP Cadastro de professores, será utilizado para obter o nome do Professor
+     * @param cadD Cadastro de disciplinas, será utilizado para obter o nome da Disciplina
+     */
     private static void mostrarTurma(Turma t, Cadastro<Professor> cadP, Cadastro<Disciplina> cadD) {
         Professor p = cadP.pesquisar(t.getCodProfessor());
         String professor = "Professor fora do cadastro. Por favor atualize a turma.";
@@ -95,6 +136,15 @@ public class MenuTurma extends Menu {
         JOptionPane.showMessageDialog(null, txt);
     }
 
+    /**
+	 * Menu que dá acesso ao cadastro de professores, permite a execução de operações
+	 * de cadastro, pesquisa, atualização e remoção de turmas pelo usuário. Além disso,
+     * permite a matrícula e remoção de alunos
+	 * @param cadT Cadastro de turmas que será acessado pelo menu
+     * @param cadP Cadastro de professores que será acessado pelo menu
+     * @param cadD Cadastro de disciplinas que será acessado pelo menu
+     * @param cadA Cadastro de alunos que será acessado pelo menu
+	 */
     public static void menuTurma(Cadastro<Turma> cadT,Cadastro<Professor> cadP, 
                                  Cadastro<Disciplina> cadD, Cadastro<Aluno> cadA) {
         String txt = "Informe a opção desejada\n" +
@@ -108,8 +158,12 @@ public class MenuTurma extends Menu {
 
         int opcao;
         do {
-            String strOpcao = JOptionPane.showInputDialog(txt);
-            opcao = Integer.parseInt(strOpcao);
+            try {
+				String strOpcao = JOptionPane.showInputDialog(txt);
+				opcao = Integer.parseInt(strOpcao);
+			} catch (NumberFormatException e) {
+				opcao = -1;
+			}
 
             switch (opcao) {
                 case 0:
@@ -160,7 +214,7 @@ public class MenuTurma extends Menu {
 
                 case 4:
                     try {
-                        String codigo = lerDado("turma", "Informe o código da turma:");;
+                        String codigo = lerDado("turma", "Informe o código da turma:");
                         boolean removido = cadT.remover(codigo);
                         if (removido) {
                             JOptionPane.showMessageDialog(null, "Turma removida do cadastro.");

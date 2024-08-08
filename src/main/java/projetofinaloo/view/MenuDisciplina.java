@@ -6,7 +6,16 @@ import projetofinaloo.app.Disciplina;
 import projetofinaloo.cadastros.Cadastro;
 import projetofinaloo.exceptions.CampoEmBrancoException;
 
+/**
+ * Classe que dá acesso ao usuário ao cadastro de disciplinas
+ * @see projetofinaloo.app.Disciplina
+ * @see projetofinaloo.cadastros.Cadastro
+ */
 public class MenuDisciplina extends Menu {
+	/**
+	 * Método utilizado para criar uma nova instância de Disciplina 
+	 * @return Uma nova instância de Disciplina ou {@code null} caso um dos campos esteja em branco
+	 */
     public static Disciplina dadosNovaDisciplina() {
         try {
             String nome = lerDado("nome", "Informe o nome da disciplina:");
@@ -20,6 +29,12 @@ public class MenuDisciplina extends Menu {
         }
     }
 
+	/**
+	 * Método utilizado para criar uma nova instância de Disciplina com um código já conhecido,
+	 * permitindo a atualização do cadastro dessa Disciplina
+	 * @param codigo Código da instáncia de Disciplina que será retornada
+	 * @return Uma nova instância de Disciplina ou {@code null} caso um dos campos esteja em branco
+	 */
     public static Disciplina dadosNovaDisciplina(String codigo) {
         try {
             String nome = lerDado("nome", "Informe o nome da disciplina:");
@@ -32,6 +47,11 @@ public class MenuDisciplina extends Menu {
         }
     }
     
+	/**
+	 * Menu que dá acesso ao cadastro de disciplinas, permite a execução de operações
+	 * de cadastro, pesquisa, atualização e remoção de disciplinas pelo usuário
+	 * @param cadDisciplina Cadastro de disciplinas que será acessado pelo menu
+	 */
     public static void menuDisciplina(Cadastro<Disciplina> cadDisciplina) {
         String txt = "Informe a opção desejada\n" +
 					 "1 - Cadastrar disciplina\n" +
@@ -43,8 +63,12 @@ public class MenuDisciplina extends Menu {
 		int opcao;
 
         do {
-			String strOpcao = JOptionPane.showInputDialog(txt);
-			opcao = Integer.parseInt(strOpcao);
+			try {
+				String strOpcao = JOptionPane.showInputDialog(txt);
+				opcao = Integer.parseInt(strOpcao);
+			} catch (NumberFormatException e) {
+				opcao = -1;
+			}
 
 			switch (opcao) {
 				case 0:
@@ -63,7 +87,7 @@ public class MenuDisciplina extends Menu {
 
 				case 2:
 					try {
-						String codigo = lerDado("código", "Informe o código da disciplina: ");;
+						String codigo = lerDado("código", "Informe o código da disciplina: ");
 						Disciplina d = cadDisciplina.pesquisar(codigo);
 						if (d != null) {
 							JOptionPane.showMessageDialog(null, d.toString());
@@ -77,7 +101,7 @@ public class MenuDisciplina extends Menu {
 
 				case 3:
 					try {
-						String codigo = lerDado("código", "Informe o código da disciplina: ");;
+						String codigo = lerDado("código", "Informe o código da disciplina: ");
 						Disciplina novoCadastro = dadosNovaDisciplina(codigo);
 						if (novoCadastro != null) {
 							boolean atualizado = cadDisciplina.atualizar(codigo, novoCadastro);
@@ -94,7 +118,7 @@ public class MenuDisciplina extends Menu {
 
 				case 4:
 					try {
-						String codigo = lerDado("código", "Informe o código da disciplina: ");;
+						String codigo = lerDado("código", "Informe o código da disciplina: ");
 						boolean removido = cadDisciplina.remover(codigo);
 						if (removido) {
 							JOptionPane.showMessageDialog(null, "Disciplina removida do cadastro");

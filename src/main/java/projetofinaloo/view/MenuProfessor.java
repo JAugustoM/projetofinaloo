@@ -6,7 +6,16 @@ import projetofinaloo.exceptions.CampoEmBrancoException;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Classe que dá acesso ao usuário ao cadastro de professores
+ * @see projetofinaloo.app.Professor
+ * @see projetofinaloo.cadastros.Cadastro
+ */
 public class MenuProfessor extends Menu {
+    /**
+	 * Método utilizado para criar uma nova instância de Professor 
+	 * @return Uma nova instância de Professor ou {@code null} caso um dos campos esteja em branco
+	 */
     public static Professor dadosNovoProfessor() {
         try {
             String nome = lerDado("nome", "Informe o nome do professor: ");
@@ -21,6 +30,12 @@ public class MenuProfessor extends Menu {
         }
     }
 
+    /**
+	 * Método utilizado para criar uma nova instância de Professor com uma matrícula já conhecida,
+	 * permitindo a atualização do cadastro desse Professor
+	 * @param matriculaFUB Matrícula da instáncia de Professor que será retornada
+	 * @return Uma nova instância de Professor ou {@code null} caso um dos campos esteja em branco
+	 */
     public static Professor dadosNovoProfessor(String matriculaFUB) {
         try {
             String nome = lerDado("nome", "Informe o nome do professor: ");
@@ -34,6 +49,11 @@ public class MenuProfessor extends Menu {
         }
     }
 
+    /**
+	 * Menu que dá acesso ao cadastro de professores, permite a execução de operações
+	 * de cadastro, pesquisa, atualização e remoção de professores pelo usuário
+	 * @param cadProfessor Cadastro de professores que será acessado pelo menu
+	 */
     public static void menuProfessor(Cadastro<Professor> cadProfessor) {
         String txt = "Informe a opção desejada\n" +
 					 "1 - Cadastrar professor\n" +
@@ -44,8 +64,12 @@ public class MenuProfessor extends Menu {
 
         int opcao;
         do {
-            String strOpcao = JOptionPane.showInputDialog(txt);
-            opcao = Integer.parseInt(strOpcao);
+            try {
+				String strOpcao = JOptionPane.showInputDialog(txt);
+				opcao = Integer.parseInt(strOpcao);
+			} catch (NumberFormatException e) {
+				opcao = -1;
+			}
 
             switch (opcao) {
                 case 0:
@@ -93,7 +117,7 @@ public class MenuProfessor extends Menu {
 
                 case 4:
                     try {
-                        String matricula = lerDado("matricula", "Informe a matrícula do professor: ");;
+                        String matricula = lerDado("matricula", "Informe a matrícula do professor: ");
                         boolean removido = cadProfessor.remover(matricula);
                         if (removido) {
                             JOptionPane.showMessageDialog(null, "Professor removido do cadastro.");

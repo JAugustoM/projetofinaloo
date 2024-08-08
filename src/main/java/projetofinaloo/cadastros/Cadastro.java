@@ -2,11 +2,11 @@ package projetofinaloo.cadastros;
 
 import java.util.HashMap;
 
-
 /**
  * Classe parametrizada que implementa todos os cadastros usados na aplicação
  * e seus métodos, possue um HashMap como único atributo responsável
  * por armazenar todos os objetos de cada cadastro
+ * @param <E> Classe que será armazenada no cadastro
  * @author José Augusto
  * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html">HashMap JavaDoc</a>
 */
@@ -32,7 +32,7 @@ public class Cadastro<E> {
 	}
 
 	/**
-	 * Retorna o objeto identificado pela chave passada como argumento ou null
+	 * Retorna o objeto identificado pela chave passada como argumento ou {@code null}
 	 * caso a chave não exista no HashMap
 	 * @param chave String que identifica um objeto no cadastro
 	 * @return Objeto no cadastro a qual corresponde a chave especificada, ou null caso o objeto não seja encontrado

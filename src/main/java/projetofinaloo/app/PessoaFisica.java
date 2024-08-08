@@ -1,6 +1,9 @@
 package projetofinaloo.app;
 
-public class PessoaFisica {
+/**
+ * Classe abstrata que define elementos padrão para as classes Aluno e Professor
+ */
+public abstract class PessoaFisica {
 	
 	private String nome, 
 	               cpf, 
